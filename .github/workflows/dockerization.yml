@@ -6,68 +6,35 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  APP_NAME: ${{ secrets.DOCKER_APP_NAME }}
+  USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  IMAGE_TAG: ${{ secrets.DOCKER_APP_TAG }}
+
 jobs:
   dockerization:
     runs-on: ubuntu-latest
-    env:
-      APP_NAME: ${{ secrets.DOCKER_APP_NAME }}
-      USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      IMAGE_TAG: ${{ secrets.DOCKER_APP_TAG }}
-
     steps:
       # Paso 1: Revisión de código
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Paso 2: Lint Dockerfile
-      - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@v2
-        with:
-          dockerfile: Dockerfile
-
-      # Paso 3: Cache de capas Docker
-      - name: Cache Docker layers
-        uses: actions/cache@v4
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-
-      # Paso 4: Configuración de Docker Buildx
+      # Paso 2: Configuración de Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # Paso 5: Extraer metadata de la imagen (para tags/labels automáticos)
-      - name: Extract metadata (tags, labels)
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.USERNAME }}/${{ env.APP_NAME }}
+      # Paso 3: Construcción de la imagen Docker
+      - name: Build the Docker image
+        run: docker build --platform linux/amd64 -t ${{ env.USERNAME }}/${{ env.APP_NAME }}:${{ env.IMAGE_TAG }} .
 
-      # Paso 6: Loguearse en Docker Hub (solo en push, no en PR)
+      # Paso 4: Loguearse en Docker Hub
       - name: Log in to Docker Hub
-        if: github.event_name != 'pull_request'
         uses: docker/login-action@v2
         with:
           username: ${{ env.USERNAME }}
           password: ${{ env.PASSWORD }}
 
-      # Paso 7: Build y push (solo push si no es PR)
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
-
-      # Paso 8: Mover cache para siguiente build
-      - name: Move Docker cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+      # Paso 5: Push de la imagen Docker a Docker Hub
+      - name: Push Docker image
+        run: docker push ${{ env.USERNAME }}/${{ env.APP_NAME }}:${{ env.IMAGE_TAG }}
