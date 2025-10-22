@@ -14,8 +14,7 @@ cat /etc/mailpit/authfile
 # Ejecutar MailPit con autenticación activada
 echo "Iniciando MailPit..."
 exec /mailpit \
-  --smtp-auth \
-  --smtp-auth-file=/etc/mailpit/authfile \
+  --smtp-auth-file /etc/mailpit/authfile \
   --smtp-auth-allow-insecure \
-  --listen ":1025" \
-  --ui-bind ":8025"
+  --smtp "0.0.0.0:1025" \
+  --listen "0.0.0.0:8025"
