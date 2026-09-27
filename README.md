@@ -29,8 +29,8 @@ SmartPot-Mail/
 │   ├── dependabot.yml
 │   └── workflows/
 │       ├── ci.yml              # Construye la imagen y corre la prueba de seguridad
-│       ├── packaging.yml       # Publica la imagen en GHCR (con SBOM y provenance)
-│       └── deploy.yml          # Despliega la app completa tras publicar
+│       ├── packaging.yml       # Publica la imagen en GHCR con SBOM y procedencia (y en Docker Hub con credenciales)
+│       └── deploy.yml          # Pide el despliegue al workflow central de SmartPotTech/.github
 ├── tests/
 │   └── smoke.sh                # Autenticación SMTP e interfaz, entrega y logs sin secretos
 ├── compose.yaml
@@ -70,6 +70,15 @@ sh tests/smoke.sh smartpot-mail:ci
 ```bash
 docker pull ghcr.io/smartpottech/smartpot-mail:latest
 ```
+
+Cada cambio en `main` pasa por el CI, publica la imagen en GHCR (y en Docker Hub como réplica cuando el repositorio tiene credenciales) y pide el despliegue al workflow central de [SmartPotTech/.github](https://github.com/SmartPotTech/.github), que actualiza producción de a uno y verifica `/health`.
+
+## Documentación
+
+El correo cubre la bienvenida y la recuperación de la contraseña; los avisos del cultivo van por la PWA y Telegram. La [documentación técnica](https://github.com/SmartPotTech/.github/blob/main/docs/SmartPot_Technical_Documentation.md) describe la red de producción y cómo se protege la bandeja. Los superdiagramas muestran la plataforma completa en una sola imagen ampliable:
+
+- [Arquitectura completa](https://github.com/SmartPotTech/.github/blob/main/docs/images/superdiagrams/SmartPot_Super_01_Architecture.svg): dónde vive Mailpit y cómo se publica su bandeja
+- [Operación completa](https://github.com/SmartPotTech/.github/blob/main/docs/images/superdiagrams/SmartPot_Super_02_Operation_Sequence.svg): el registro con su correo de bienvenida y la recuperación de la contraseña
 
 ## Licencia
 
