@@ -75,7 +75,7 @@ Cada cambio en `main` pasa por el CI, publica la imagen en GHCR (y en Docker Hub
 
 ## Documentación
 
-El correo cubre la bienvenida y la recuperación de la contraseña; los avisos del cultivo van por la PWA y Telegram. La [documentación técnica](https://github.com/SmartPotTech/.github/blob/main/docs/SmartPot_Technical_Documentation.md) describe la red de producción y cómo se protege la bandeja. Los diagramas generales muestran la plataforma completa en una sola imagen ampliable:
+El correo cubre la bienvenida y la recuperación de la contraseña; los avisos del cultivo van por la PWA y Telegram. Su documentación propia está en [`docs/`](docs/SmartPot_Mail_Documentation.md) (también en [DOCX](docs/SmartPot_Mail_Documentation.docx) y [PDF](docs/SmartPot_Mail_Documentation.pdf)), con sus diagramas en [`docs/diagrams`](docs/diagrams): el general de la imagen y el flujo de los correos. La [documentación técnica](https://github.com/SmartPotTech/.github/blob/main/docs/SmartPot_Technical_Documentation.md) describe la red de producción y cómo se protege la bandeja. Los diagramas generales muestran la plataforma completa en una sola imagen ampliable:
 
 - [Arquitectura completa](https://github.com/SmartPotTech/.github/blob/main/docs/diagrams/SmartPot_Global_01_Architecture.svg): dónde vive Mailpit y cómo se publica su bandeja
 - [Operación completa](https://github.com/SmartPotTech/.github/blob/main/docs/diagrams/SmartPot_Global_02_Operation_Sequence.svg): el registro con su correo de bienvenida y la recuperación de la contraseña
