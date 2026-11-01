@@ -47,9 +47,34 @@ SmartPot-Mail/
 
 ## Guía de Instalación
 
+### Despliegue en un comando
+
+La imagen es pública: `ghcr.io/smartpottech/smartpot-mail`. La plataforma completa, con este servicio incluido, se
+levanta con un solo comando y sin descargar el código:
+
 ```bash
-git clone https://github.com/SmartPotTech/SmartPot-Mail.git
-cd SmartPot-Mail
+curl -fsSL https://raw.githubusercontent.com/SmartPotTech/.github/main/docker/demo/compose.yaml | docker compose -f - up -d --wait
+```
+
+Abre http://localhost:5173 e ingresa con `demo@smartpot.app` / `SmartPot2026`. Se detiene con
+`docker compose -p smartpot-demo down` (con `-v` borra también los datos). Más detalle en la
+[demo](https://github.com/SmartPotTech/.github/tree/main/docker/demo).
+El mismo servicio corre en la [demo beta](https://github.com/SmartPotTech/.github/tree/main/docker/demo-beta) del stack nuevo: cambia `demo` por `demo-beta`
+en la URL y en el nombre del proyecto.
+
+Solo este servicio, con la imagen publicada:
+
+```bash
+docker run -d --name smartpot-mail --read-only --tmpfs /tmp --cap-drop ALL \
+  -p 127.0.0.1:1025:1025 -p 127.0.0.1:8025:8025 \
+  -e MAIL_USERNAME=smartpot -e MAIL_PASSWORD=<contraseña-smtp> \
+  -e MAILPIT_UI_USERNAME=admin -e MAILPIT_UI_PASSWORD=<contraseña-de-la-interfaz> \
+  ghcr.io/smartpottech/smartpot-mail:latest
+```
+
+### Desde el código con Docker Compose
+
+```bash
 cp .env.example .env    # define las dos contraseñas
 docker compose up -d
 ```
