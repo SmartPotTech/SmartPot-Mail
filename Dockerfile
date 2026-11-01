@@ -1,4 +1,4 @@
-FROM axllent/mailpit:v1.31.6
+FROM axllent/mailpit:v1.33.0
 
 LABEL org.opencontainers.image.title="SmartPot Mail" \
       org.opencontainers.image.description="Mailpit de SmartPot con autenticación SMTP e interfaz protegida" \
