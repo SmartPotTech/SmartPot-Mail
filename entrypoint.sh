@@ -1,14 +1,14 @@
 #!/bin/sh
 set -eu
 
-: "${MAIL_USERNAME:?Falta MAIL_USERNAME para la autenticación SMTP}"
-: "${MAIL_PASSWORD:?Falta MAIL_PASSWORD para la autenticación SMTP}"
-: "${MAILPIT_UI_USERNAME:?Falta MAILPIT_UI_USERNAME para proteger la interfaz web}"
-: "${MAILPIT_UI_PASSWORD:?Falta MAILPIT_UI_PASSWORD para proteger la interfaz web}"
+: "${MAIL_USERNAME:?Missing MAIL_USERNAME for SMTP authentication}"
+: "${MAIL_PASSWORD:?Missing MAIL_PASSWORD for SMTP authentication}"
+: "${MAILPIT_UI_USERNAME:?Missing MAILPIT_UI_USERNAME to protect the web UI}"
+: "${MAILPIT_UI_PASSWORD:?Missing MAILPIT_UI_PASSWORD to protect the web UI}"
 
 for secret in "$MAIL_PASSWORD" "$MAILPIT_UI_PASSWORD"; do
   if [ "${#secret}" -lt 12 ]; then
-    echo "Las contraseñas de Mailpit deben tener al menos 12 caracteres."
+    echo "Mailpit passwords must be at least 12 characters long."
     exit 1
   fi
 done
@@ -21,5 +21,5 @@ export MP_MAX_MESSAGES="${MP_MAX_MESSAGES:-500}"
 export MP_MAX_AGE="${MP_MAX_AGE:-30d}"
 unset MAIL_PASSWORD MAILPIT_UI_PASSWORD
 
-echo "Mailpit con autenticación SMTP (usuario $MAIL_USERNAME) e interfaz protegida (usuario $MAILPIT_UI_USERNAME)."
+echo "Mailpit started with SMTP authentication (user $MAIL_USERNAME) and protected UI (user $MAILPIT_UI_USERNAME)."
 exec /mailpit --smtp "0.0.0.0:1025" --listen "0.0.0.0:8025" "$@"
