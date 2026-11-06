@@ -53,7 +53,7 @@ The image is public: `ghcr.io/smartpottech/smartpot-mail`. The full platform, in
 curl -fsSL https://raw.githubusercontent.com/SmartPotTech/.github/main/docker/demo/compose.yaml | docker compose -f - up -d --wait
 ```
 
-Open http://localhost:5173 and sign in with `demo@smartpot.app` / `SmartPot2026`. Stop it with `docker compose -p smartpot-demo down` (add `-v` to also remove data). See the [demo](https://github.com/SmartPotTech/.github/tree/main/docker/demo) and [demo beta](https://github.com/SmartPotTech/.github/tree/main/docker/demo-beta) for details.
+Open http://localhost:5173 and sign in with `demo@smartpot.app` / `SmartPot2026`. Stop it with `docker compose -p smartpot-demo down` (add `-v` to also remove data). See the [demo](https://github.com/SmartPotTech/.github/tree/main/docker/demo) for details.
 
 To run only this service from the published image:
 
@@ -156,7 +156,7 @@ La imagen es pública: `ghcr.io/smartpottech/smartpot-mail`. La plataforma compl
 curl -fsSL https://raw.githubusercontent.com/SmartPotTech/.github/main/docker/demo/compose.yaml | docker compose -f - up -d --wait
 ```
 
-Abre http://localhost:5173 e ingresa con `demo@smartpot.app` / `SmartPot2026`. Se detiene con `docker compose -p smartpot-demo down` (con `-v` borra también los datos). Más detalle en la [demo](https://github.com/SmartPotTech/.github/tree/main/docker/demo) y en la [demo beta](https://github.com/SmartPotTech/.github/tree/main/docker/demo-beta).
+Abre http://localhost:5173 e ingresa con `demo@smartpot.app` / `SmartPot2026`. Se detiene con `docker compose -p smartpot-demo down` (con `-v` borra también los datos). Más detalle en la [demo](https://github.com/SmartPotTech/.github/tree/main/docker/demo).
 
 Solo este servicio, con la imagen publicada:
 
