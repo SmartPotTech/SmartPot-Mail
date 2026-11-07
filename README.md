@@ -103,6 +103,7 @@ Every change on `main` runs through CI, publishes the image to GHCR (and Docker 
 
 Email covers welcome and password recovery; crop alerts go through the PWA and Telegram. Component documentation is in [`docs/`](docs/SmartPot_Mail_Documentation.md) (also in [DOCX](docs/SmartPot_Mail_Documentation.docx) and [PDF](docs/SmartPot_Mail_Documentation.pdf)), with diagrams in [`docs/diagrams`](docs/diagrams).
 
+- [Interactive diagrams](docs/diagrams/interactive/README.md#english): hardened container startup, in English and Spanish, with links to the exact source lines
 - [Full Architecture](https://github.com/SmartPotTech/.github/blob/main/docs/diagrams/SmartPot_Global_01_Architecture.svg): where Mailpit lives and how its inbox is exposed
 - [Full Operation](https://github.com/SmartPotTech/.github/blob/main/docs/diagrams/SmartPot_Global_02_Operation_Sequence.svg): registration welcome email and password recovery
 
@@ -208,6 +209,7 @@ Cada cambio en `main` pasa por el CI, publica la imagen en GHCR (y en Docker Hub
 
 El correo cubre la bienvenida y la recuperación de la contraseña; los avisos del cultivo van por la PWA y Telegram. Su documentación propia está en [`docs/`](docs/SmartPot_Mail_Documentation.md) (también en [DOCX](docs/SmartPot_Mail_Documentation.docx) y [PDF](docs/SmartPot_Mail_Documentation.pdf)), con sus diagramas en [`docs/diagrams`](docs/diagrams).
 
+- [Diagramas interactivos](docs/diagrams/interactive/README.md#español): el arranque endurecido del contenedor, en español e inglés, con enlaces a las líneas exactas del código
 - [Arquitectura completa](https://github.com/SmartPotTech/.github/blob/main/docs/diagrams/SmartPot_Global_01_Architecture.svg): dónde vive Mailpit y cómo se publica su bandeja
 - [Operación completa](https://github.com/SmartPotTech/.github/blob/main/docs/diagrams/SmartPot_Global_02_Operation_Sequence.svg): el registro con su correo de bienvenida y la recuperación de la contraseña
 
