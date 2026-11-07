@@ -164,6 +164,10 @@ elif mode == "cleanup":
     data = search()
     if data.get("messages_count", 0) != 0:
         raise SystemExit("test messages were not removed: %s left" % data.get("messages_count"))
+elif mode == "list":
+    data = request("/api/v1/messages?limit=1")
+    if "messages" not in data or "total" not in data:
+        raise SystemExit("the authenticated messages endpoint returned an unexpected document")
 else:
     raise SystemExit("unknown mode: " + mode)
 PY
@@ -325,6 +329,8 @@ check "web UI requires credentials (401 without user)" test "$(http_code "$MAILP
 
 check "web UI rejects wrong credentials (401)" \
   test "$(http_code -u "$MAILPIT_UI_USERNAME:wrong-password" "$MAILPIT_API_URL/api/v1/messages")" = "401"
+
+check "authenticated API lists messages" "$PYTHON" "$WORK/api.py" list
 
 check "SMTP rejects mail without AUTH (530/535)" smtp_without_auth_is_rejected
 
