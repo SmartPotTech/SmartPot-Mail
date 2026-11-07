@@ -89,6 +89,8 @@ docker build -t smartpot-mail:ci .
 sh tests/smoke.sh smartpot-mail:ci
 ```
 
+The test starts a throwaway container and verifies the public health endpoint, the `401` on the web API without credentials, the SMTP rejection of anonymous or wrongly authenticated mail, the delivery of an authenticated message, and its subject, recipient and body through the Mailpit API. It then deletes only its own messages. Docker, `curl` and Python 3 are required; `swaks` is used when available and Python `smtplib` otherwise. `SMTP_HOST`, `SMTP_PORT`, `SMTP_AUTH` (`LOGIN`/`PLAIN`), `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, `SMTP_TO`, `MAILPIT_API_URL`, `MAILPIT_UI_USERNAME`, `MAILPIT_UI_PASSWORD` and `PYTHON` can be overridden; `SMOKE_EXTERNAL=1` targets an already running server instead of creating the container.
+
 ### Published Image
 
 ```bash
@@ -191,6 +193,8 @@ Mailpit puede reenviar todos los mensajes a un proveedor SMTP. Descomenta las va
 docker build -t smartpot-mail:ci .
 sh tests/smoke.sh smartpot-mail:ci
 ```
+
+La prueba arranca un contenedor desechable y verifica el endpoint público de salud, el `401` de la API web sin credenciales, el rechazo SMTP del correo anónimo o con clave incorrecta, la entrega de un mensaje autenticado y su asunto, destinatario y cuerpo a través de la API de Mailpit. Después borra solo sus propios mensajes. Requiere Docker, `curl` y Python 3; usa `swaks` si está disponible y, si no, `smtplib` de Python. Se pueden sobrescribir `SMTP_HOST`, `SMTP_PORT`, `SMTP_AUTH` (`LOGIN`/`PLAIN`), `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, `SMTP_TO`, `MAILPIT_API_URL`, `MAILPIT_UI_USERNAME`, `MAILPIT_UI_PASSWORD` y `PYTHON`; `SMOKE_EXTERNAL=1` apunta a un servidor ya arrancado en lugar de crear el contenedor.
 
 ### Imagen publicada
 
