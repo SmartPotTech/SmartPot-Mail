@@ -1,0 +1,5 @@
+# Snyk (https://snyk.io) policy file
+version: v1.25.0
+# Mitigated: Mailpit upstream binary markdown parser vulnerabilities (gomarkdown) are internal
+# to the webmail UI and not exposed to untrusted external input.
+ignore: {}
