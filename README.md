@@ -18,6 +18,20 @@ SmartPot-Mail is the SmartPot mail server, powered by **Mailpit**. It receives t
 | 1025 | Authenticated SMTP                                   | Internal Docker network only                  |
 | 8025 | Mailpit web UI and API, protected by username & pass | `https://mail.smartpot.app` behind Nginx      |
 
+```mermaid
+flowchart LR
+  api["SmartPot-API"]
+  subgraph mail["SmartPot-Mail Container · axllent/mailpit:v1.33.0"]
+    direction TB
+    entry["entrypoint.sh<br/>Configures SMTP auth & UI auth"]
+    smtp["SMTP Server :1025<br/>Plain Auth No-Enc on internal network"]
+    web["Web UI :8025<br/>Protected mailbox view"]
+    health["Healthcheck<br/>/mailpit readyz"]
+  end
+  api -->|"welcome & reset emails"| smtp
+  entry --> smtp & web
+```
+
 ### Security
 
 - SMTP requires a username and password (`MAIL_USERNAME`, `MAIL_PASSWORD`); plain authentication without TLS is only allowed because traffic never leaves the internal network.
@@ -123,6 +137,20 @@ SmartPot-Mail es el servidor de correo de SmartPot, basado en **Mailpit**. Recib
 |--------|---------------------------------------------------------|-----------------------------------------------|
 | 1025   | SMTP con autenticación                                  | Solo la red interna de Docker                 |
 | 8025   | Interfaz web y API de Mailpit, con usuario y contraseña | `https://mail.smartpot.app` a través de Nginx |
+
+```mermaid
+flowchart LR
+  api["SmartPot-API"]
+  subgraph mail["SmartPot-Mail Container · axllent/mailpit:v1.33.0"]
+    direction TB
+    entry["entrypoint.sh<br/>Configures SMTP auth & UI auth"]
+    smtp["SMTP Server :1025<br/>Plain Auth No-Enc on internal network"]
+    web["Web UI :8025<br/>Protected mailbox view"]
+    health["Healthcheck<br/>/mailpit readyz"]
+  end
+  api -->|"welcome & reset emails"| smtp
+  entry --> smtp & web
+```
 
 ### Seguridad
 

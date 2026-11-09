@@ -61,7 +61,7 @@ flowchart LR
 ```mermaid
 %%{init: {"theme": "base", "fontFamily": "Segoe UI, Arial, sans-serif", "themeVariables": {"fontFamily": "Segoe UI, Arial, sans-serif", "fontSize": "15px", "primaryColor": "#DDF5EA", "primaryTextColor": "#17261F", "primaryBorderColor": "#067A52", "secondaryColor": "#E3F2FB", "secondaryTextColor": "#17261F", "secondaryBorderColor": "#1F6FA0", "tertiaryColor": "#F2F7F4", "tertiaryTextColor": "#17261F", "tertiaryBorderColor": "#D5E3DC", "lineColor": "#5B6B63", "textColor": "#17261F", "mainBkg": "#DDF5EA", "nodeBorder": "#067A52", "clusterBkg": "#F7FAF8", "clusterBorder": "#D5E3DC", "edgeLabelBackground": "#FFFFFF", "actorBkg": "#067A52", "actorBorder": "#0B3D2B", "actorTextColor": "#FFFFFF", "actorLineColor": "#5B6B63", "signalColor": "#17261F", "signalTextColor": "#17261F", "labelBoxBkgColor": "#0B3D2B", "labelBoxBorderColor": "#0B3D2B", "labelTextColor": "#FFFFFF", "loopTextColor": "#0B3D2B", "noteBkgColor": "#FDF4DD", "noteBorderColor": "#C98D12", "noteTextColor": "#17261F", "activationBkgColor": "#DDF5EA", "activationBorderColor": "#067A52", "attributeBackgroundColorOdd": "#FFFFFF", "attributeBackgroundColorEven": "#F2F7F4"}}}%%
 flowchart LR
-  api["SmartPot-API<br/>internal/mail"] -->|"SMTP :1025 (authenticated)"| mailpit["SmartPot-Mail (Mailpit v1.33.0 v1.33.0)"]
+  api["SmartPot-API<br/>internal/mail"] -->|"SMTP :1025 (authenticated)"| mailpit["SmartPot-Mail (Mailpit v1.33.0)"]
   mailpit -->|"Web UI :8025 (Basic Auth)"| admin["Admin / Developer Mailbox"]
   classDef core fill:#067A52,stroke:#0B3D2B,color:#FFFFFF
   classDef leaf fill:#DDF5EA,stroke:#067A52,color:#17261F
